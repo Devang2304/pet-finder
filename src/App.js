@@ -1,4 +1,8 @@
 import React from 'react';
+import header from './components/Header'; 
+import List from './components/List'; 
+import Map from './components/Map'; 
+ 
 
 const App =()=>{
     return (
