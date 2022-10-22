@@ -1,7 +1,7 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
 import { Paper,Typography,useMediaQuery } from "@material-ui/core";
-import  LocationCityOutlinedIcon  from "@material-ui/icons/LocationCityOutlined";
+import  LocationOnOutlinedIcon  from "@material-ui/icons/LocationOnOutlined";
 
 import useStyles from "./styles";
 const Map =()=>{
@@ -25,5 +25,6 @@ const Map =()=>{
         </div>
     );
 }
-
+// AIzaSyB5BcTUyQp0FEXQgkIJnx7VzFUrqIXeJI4
 export default  Map;
+
