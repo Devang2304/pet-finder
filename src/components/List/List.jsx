@@ -1,5 +1,5 @@
 import React from "react";
-// import Geolocation from "../Geolocation/geolocation";
+import Geolocation from "../Geolocation/geolocation";
 import { CircularProgress,Grid,Typography,InputLabel,MenuItem,FormControl,Select,Button } from "@material-ui/core";
 import UploadImage from "../ImageUpload/UploadImage";
 import useStyles from "./styles";
@@ -20,6 +20,7 @@ const List =()=>{
             {/* {
                 location.loaded ? JSON.stringify(location) : "location is not available yet"
             } */}
+            <Geolocation/>
             <Typography variant="h4">Stress dogs around you</Typography>
         </div>
     );

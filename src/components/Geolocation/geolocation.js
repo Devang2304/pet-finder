@@ -33,6 +33,6 @@ const Geolocation=()=>{
         }
     navigator.geolocation.getCurrentPosition(onSucess,onError); 
     },[]);
-    return location;
+    return location.loaded ? JSON.stringify(location) : "location is not available yet";
 };
 export default Geolocation;
