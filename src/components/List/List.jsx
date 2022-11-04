@@ -15,7 +15,8 @@ const List =()=>{
         
         <div className={classes.container}>
             <Typography variant="h5">If you know any stress dog if give your current location & dog's photo</Typography>
-            <Button className={classes.Button} onClick={<UploadImage/>} variant="contained">Upload Image</Button>
+            {/* <Button className={classes.Button} onChange={<UploadImage/>} variant="contained">Upload Image</Button> */}
+            <UploadImage/>
             <Button className={classes.Button} variant="contained">Current Location</Button>
             {/* {
                 location.loaded ? JSON.stringify(location) : "location is not available yet"
