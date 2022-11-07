@@ -4,7 +4,7 @@ const imgSchema = new mongoose.Schema({
     img:{
         data:Buffer,
         contentType:String,
-        required:[true],
+        // required:[true],
     },
     location: {
         type: {
