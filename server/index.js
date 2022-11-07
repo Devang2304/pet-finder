@@ -1,50 +1,69 @@
-const express =require("express");
-const app = express();
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const multer= require("multer");
-const cors =require("cors");
-const port =5000;
-const fs=require("fs"); 
-const imageModel=require('./models');
-app.use(cors());
+var express =require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var mongoose= require('mongoose');
 
-app.use(bodyParser.urlencoded({ extended:false }));
-app.use(bodyParser.json());
+var fs=require('fs');
+var path = require('path');
+const multer = require('multer');
+require('dotenv/config');
 
 mongoose.connect("mongodb+srv://DEVANG23:sGS9G3qDgNVQztE@cluster0.ngb8lfk.mongodb.net/test",
- {useNewUrlParser: true , useUnifiedTopology: true}
-)
-.then(()=> console.log("Connected successfully"))
-.catch((err)=>console.log("it has an error",err));
+{useNewUrlParser: true , useUnifiedTopology: true},err=>{
+    console.log('connected')
+});
+
+app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.json())
+
+app.set("view engine","ejs");
 
 
-
-
-app.get("/",(req,res)=>res.send("This is working fine"));
-
-const storage=multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null,'/server/uploads')
+var storage=multer.diskStorage({
+    destination:(req,file,cb) => {
+        cb(null,'./uploads');
     },
-    filename:(req,file,cb)=>{
-        cb(null,file.originalname);
+    filename: (req,file,cb) => {
+        cb(null,file.fieldname + '-' + Date.now())
     }
 });
-const upload =multer({storage:storage})
 
-app.post('/',upload.single('testImage'),(req,res)=>{
-    const saveImage =new imageModel({
-        name:req.body.name,
-        img:{
-            data:fs.readFileSync("/server/uploads"+ req.file.filename),
-            contentType:"image/png",
-        },
+var upload =multer({storage:storage});
+
+var imgModel=require('./models');
+
+app.get('/',(req,res) =>{
+    imgModel.find({},(err,items) => {
+        if(err){
+            console.log(err);
+            res.status(500).send('An error occurred',err);
+        }
+        // else{
+        //     res.render('imagesPage',{items:items});
+        // }
     });
-    saveImage.save()
-    .then((res)=>{console.log('image is saved')})
-    .catch((err)=>{console.log(err,'errror has occured')});
 });
-app.listen(port,()=>{
-    console.log("server running successfully");
-});
+
+app.post('/',upload.single('image'),(req,res,next)=>{
+    var obj = {
+        img: {
+            data:fs.readFileSync(path.join(__dirname + '/server/uploads' + req.file.filename)),
+            contentType: 'image/png'
+            }
+        }
+        imgModel.create(obj,(err,item) =>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                item.save();
+                res.redirect('/');
+            }
+        });
+    });
+    var port = process.env.PORT || 3000
+    app.listen(port,err=>{
+        if (err) 
+            throw err;
+            console.log('Server listening on port',port);
+    })
