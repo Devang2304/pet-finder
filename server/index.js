@@ -31,7 +31,7 @@ var storage=multer.diskStorage({
 var upload =multer({storage:storage});
 
 var imgModel=require('./models');
-
+app.use(bodyParser.json());
 app.get('/',(req,res) =>{
     imgModel.find({},(err,items) => {
         if(err){
@@ -42,6 +42,7 @@ app.get('/',(req,res) =>{
         //     res.render('imagesPage',{items:items});
         // }
     });
+    res.sendFile(path.join(__dirname,'/src/components/List/List.jsx'));
 });
 
 app.post('/',upload.single('image'),(req,res,next)=>{
