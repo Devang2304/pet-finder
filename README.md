@@ -5,9 +5,9 @@ The website have integrated google map in it where whenever user opens our app. 
 I have created a _*REST API*_ for fetching location and image data of the pet available within the range set by the user. User can also perform search operation for getting the locations of pets present in other areas.By default the street pets locations are displayed according to the user's current location.
 
 # Techstack I have used ⬇️
-1️⃣ Google Map API  &nbsp;
-2️⃣ NodeJS & expressJS  &nbsp;
-3️⃣ MongoDB  &nbsp;
+1️⃣ Google Map API&nbsp;
+2️⃣ NodeJS & expressJS&nbsp;
+3️⃣ MongoDB&nbsp;
 4️⃣ RESTful API (developed by me)
 
 If you want to contribute feel free to do it.
